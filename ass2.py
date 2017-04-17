@@ -9,10 +9,17 @@ sc = SparkContext(conf=conf)
 input_text_file=sys.argv[1]
 output_text_file=sys.argv[2]
 
-counts=sc.textFile(input_text_file).flatMap(lambda x: x.split()).map(lambda x: (x,1)).reduceByKey(lambda x,y: x+y)
+counts=sc.textFile("testt.txt").flatMap(lambda x: x.split()).map(lambda x: (x,1)).reduceByKey(lambda x,y: x+y)
 
 counts.saveAsTextFile(output_text_file)
 
+
+first_target_file = "/home/mahdiye/Downloads/odyssey"
+second_target_file = "/home/mahdiye/Downloads/iliad"
+first_logs = sc.textFile(first_target_file)
+first_logs.count()
+second_logs = sc.textFile("testt.txt")
+second_logs.count()
 Q 2
 counts=sc.textFile("testt.txt").filter(lambda line: "starting session" in line).filter(lambda line: "achille" in line)
 
